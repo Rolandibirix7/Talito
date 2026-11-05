@@ -1,0 +1,23 @@
+# Blueprint de Render: crea el servicio web con un clic ("New > Blueprint").
+# La base de datos vive en Neon (gratis y sin vencimiento), no en Render.
+services:
+  - type: web
+    name: talito
+    runtime: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    healthCheckPath: /api/salud
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL      # la copias desde Neon
+        sync: false
+      - key: ADMIN_EMAIL       # correo del primer administrador
+        sync: false
+      - key: ADMIN_PASSWORD    # contraseña del primer administrador (mín. 8 caracteres)
+        sync: false
+      - key: JWT_SECRET        # Render genera uno aleatorio
+        generateValue: true

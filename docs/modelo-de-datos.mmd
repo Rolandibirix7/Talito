@@ -1,0 +1,47 @@
+erDiagram
+    CATEGORIAS ||--o{ PLATILLOS : "agrupa"
+    PLATILLOS  ||--o{ DETALLE_PEDIDO : "se pide en"
+    PEDIDOS    ||--|{ DETALLE_PEDIDO : "contiene"
+
+    CATEGORIAS {
+        int id PK
+        varchar nombre
+        varchar slug UK
+        smallint orden
+    }
+    PLATILLOS {
+        int id PK
+        int categoria_id FK
+        varchar nombre
+        varchar descripcion
+        numeric precio
+        boolean disponible
+    }
+    PEDIDOS {
+        int id PK
+        smallint mesa
+        varchar nombre
+        varchar estado "nueva, preparando, lista, cobrada"
+        timestamptz creado_en
+    }
+    DETALLE_PEDIDO {
+        int id PK
+        int pedido_id FK
+        int platillo_id FK
+        varchar nombre "copia del momento"
+        numeric precio_unitario "copia del momento"
+        smallint cantidad
+    }
+    LLAMADAS_MESERO {
+        int id PK
+        smallint mesa
+        boolean atendida
+        timestamptz creado_en
+    }
+    USUARIOS {
+        int id PK
+        varchar nombre
+        varchar correo UK
+        varchar clave_hash
+        timestamptz creado_en
+    }

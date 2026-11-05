@@ -1,0 +1,25 @@
+{
+  "name": "talito",
+  "version": "1.0.0",
+  "private": true,
+  "description": "TA'LITO - gestión de pedidos para restaurantes (React + Express + PostgreSQL)",
+  "type": "module",
+  "engines": { "node": ">=20.19" },
+  "scripts": {
+    "setup": "npm install && npm --prefix client install",
+    "dev:server": "node --watch server/index.js",
+    "dev:client": "npm --prefix client run dev",
+    "build": "npm --prefix client install --include=dev && npm --prefix client run build",
+    "start": "node server/index.js",
+    "db:init": "node server/scripts/init.js"
+  },
+  "dependencies": {
+    "@electric-sql/pglite": "0.5.14",
+    "bcryptjs": "3.0.3",
+    "cookie-parser": "1.4.7",
+    "express": "5.3.0",
+    "helmet": "8.3.0",
+    "jsonwebtoken": "9.0.3",
+    "pg": "8.23.1"
+  }
+}
